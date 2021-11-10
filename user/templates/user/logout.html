@@ -1,0 +1,25 @@
+{% extends "app/base.html" %}
+{% block content %}
+{% load static %}
+
+<body>
+    <section class="login py-5">
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center g-0 logshow bg-white text-center">
+                <div class="text-center py-5">
+                     <h1 class="p-5">You have been logged out!</h1>
+                        <div class="border-top pt-3">
+                            <small class="text-muted py-5 mb-4 p-5">
+                                <a href="{% url 'login' %}">Sign In</a>
+                            </small>
+                        </div>
+                </div>                        
+            </div>
+        </div>
+
+    </section>
+
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
+{% endblock %}

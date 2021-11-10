@@ -1,0 +1,39 @@
+{% extends "app/base.html" %}
+{% block content %}
+
+    <section class="login py-5">
+        <div class="container">
+            <div class="row g-0 logshow text-center">
+                <div class="col-lg-5 img-fluid logimg"></div>
+                <div class="col-lg-7 text-center py-5">
+                     <h1>Register Now!</h1>
+
+                     <form>
+                        <div class="offset-1 col-lg-10 mb-3 text-center">
+                            <label for="exampleInputEmail" class="form-label">Full Name</label>
+                            <input type="name" class="form-control form-control-lg shadow" id="exampleInputName" placeholder="Enter your full name" aria-describedby="emailHelp">  
+                        </div>
+                         <div class="offset-1 col-lg-10 mb-3 text-center">
+                             <label for="exampleInputEmail" class="form-label">Email</label>
+                             <input type="email" class="form-control form-control-lg shadow" id="exampleInputEmail" placeholder="Enter your email" aria-describedby="emailHelp"> 
+                         </div>
+                         <div class="offset-1 col-lg-10 mb-3">
+                            <label for="exampleInputPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control form-control-lg shadow" placeholder="Enter your Password" id="exampleInputPassword">
+                        </div>
+                        <div class="offset-1 col-lg-10 mb-3">
+                            <label for="exampleInputPassword" class="form-label text-center">Confirm Password</label>
+                            <input type="password" class="form-control form-control-lg shadow" placeholder="Enter your Password" id="exampleInputPassword">
+                        </div>
+                        <div class="offset-1 col-lg-10 py-3 mb-3">
+                            <button type="submit" class="btn btn-primary rounded-pill">Submit</button>
+                        </div>
+                        <p class="message">Already a user? <a href="{% url 'app-home' %}"> Login Now!</a></p>
+                     </form>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}

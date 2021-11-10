@@ -1,0 +1,47 @@
+{% extends "app/base.html" %}
+{% block content %}
+{% load static %}
+
+<body class="bodie">
+    <div class="card card-body justify-content-center align-items-center py-4 m-4 p-4 g-0 shadow">
+        <h1 class="text-center">Files</h1><hr>
+        <br><br />
+
+        <h3>Product Name</h3>
+        <h5 class="mb-3">{{cont.productName}}</h5>
+
+        <h3>Container Number</h3>
+        <h5 class="mb-3">{{cont.containerNo}}</h5>
+
+        <h3>Agent Name</h3>
+        <h5 class="mb-3">{{cont.agentName}}</h5>
+
+        <h3>Date Created</h3>
+        <h5 class="mb-3">{{cont.dateCreated}}</h5>
+
+        <h3 class="text-center">Receipt</h3>
+        {% if cont.receiptDoc %}
+        <img class="img-fluid mb-3" src="{{cont.receiptDoc.url}}">
+        <a class=" mb-3 btn btn-primary" href="{{cont.receiptDoc.url}}" download>Download</a>
+        {% endif %}
+
+        <h3>Endorsement</h3>
+        {% if cont.endorsementDoc %}
+        <img class="img-fluid mb-3" src="{{cont.endorsementDoc.url}}">
+        <a class=" mb-3 btn btn-primary" href="{{cont.endorsementDoc.url}}" download>Download</a>
+        {% endif %}
+
+        <h3>Date Renewed</h3>
+        <h5 class="mb-3">{{cont.dateRenewed}}</h5>
+
+        <h3>Expiry Date</h3>
+        <h5 class="mb-3">{{cont.expiryDate}}</h5>
+
+    </div>
+
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    
+</body>
+    
+</html>
+{% endblock %}

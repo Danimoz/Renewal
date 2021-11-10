@@ -1,0 +1,37 @@
+{% extends "app/base.html" %}
+{% block content %}
+{% load static %}
+
+<body class="bodies">
+
+    <section class="logins py-5">
+        <div class="container">
+            <div class="row g-0 logshow text-center">
+
+                <div class="col-12 col-lg-6 par text-center shadow p-3 py-5">
+                    <div class="child text-center">
+                        <h1 class="py-5 mb-3">New User?</h1>
+                        <a href="{% url 'register' %}"><button class="btn btn-primary">Signup</button></a>
+                        
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 par1 text-center shadow p-3 py-5">
+                    <div class="child text-center">
+                        <h1 class="py-5 mb-3">Existing User?</h1>
+                        <a href="{% url 'login' %}"><button class="btn btn-primary">Login</button></a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </section>
+
+
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    
+</body>
+
+</html>
+{% endblock %}

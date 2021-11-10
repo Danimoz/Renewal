@@ -1,0 +1,56 @@
+{% extends "app/base.html" %}
+{% block content %}
+{% load static %}
+
+<body class="bodie">
+    <div class="card card-body justify-content-center align-items-center py-4 m-4 p-4 g-0 shadow">
+        <h1 class="text-center">Files</h1><hr>
+        <br><br />
+
+        <h3>Trademark Name</h3>
+        <h5 class="mb-3">{{trads.trademarkName}}</h5>
+
+        <h3>Trademark Class</h3>
+        <h5 class="mb-3">{{trads.trademarkClass}}</h5>
+
+        <h3>Date Created</h3>
+        <h5 class="mb-3">{{trads.dateCreated}}</h5>
+
+        <h3 class="text-center">Acknowledgement Document</h3>
+        {% if trads.acknowledgeDoc %}
+        <img class="img-fluid mb-3" src="{{trads.acknowledgeDoc.url}}">
+        <a class=" mb-3 btn btn-primary" href="{{trads.acknowledgeDoc.url}}" download>Download</a>
+        {% endif %}
+
+        <h3>Acceptance Document</h3>
+        {% if trads.acceptanceDoc %}
+        <img class="img-fluid mb-3" src="{{trads.acceptanceDoc.url}}">
+        <a class=" mb-3 btn btn-primary" href="{{trads.acceptance.url}}" download>Download</a>
+        {% endif %}
+
+        <h3>Certificate</h3>
+        {% if trads.cert %}
+        <img class="img-fluid mb-3" src="{{trads.cert.url}}">
+        <a class=" mb-3 btn btn-primary" href="{{trads.cert.url}}" download>Download</a>
+        {% endif %}
+
+        <h3>Renewal Document</h3>
+        {% if trads.renewalDoc %}
+        <img class="img-fluid mb-3" src="{{trads.renewalDoc.url}}">
+        <a class=" mb-3 btn btn-primary" href="{{trads.renewalDoc.url}}" download>Download</a>
+        {% endif %}
+
+        <h3>Date Renewed</h3>
+        <h5 class="mb-3">{{trads.dateRenewed}}</h5>
+
+        <h3>Shelf Life</h3>
+        <h5 class="mb-3">{{trads.shelfLife}}</h5>
+
+    </div>
+
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    
+</body>
+    
+</html>
+{% endblock %}

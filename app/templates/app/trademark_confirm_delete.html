@@ -1,0 +1,90 @@
+{% extends "app/base.html" %}
+{% block content %}
+{% load static %}
+
+<body class="bodie">
+    
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Department</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <div class="navbar-nav">
+          <div class="nav-item text-nowrap">
+            {% if user.is_authenticated %}
+              <a class="nav-link px-3" href="{% url 'profile' %}">Profile</a>
+              <a class="nav-link px-3" href="{% url 'logout' %}">Log out</a>
+            {% else %}
+              <a class="nav-link px-3" href="{% url 'login' %}">Login</a>
+            {% endif %}
+          </div>
+        </div>
+      </header>
+
+      <section>
+        <div class="container">
+          <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 mt-4 col-lg-2 d-md-block bg-light sidebar collapse">
+              <div class="pt-3">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                      <span data-feather="home"></span>
+                      Dashboard
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'app-dashboard' %}">
+                      Logistics
+                    </a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                      Containers
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item " href="{% url 'container-create' %}"> Add New Product</a>
+                      <a class="dropdown-item " href="{% url 'app-container' %}"> All Containers</a>
+                    </div>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenuLink2" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                      Trademarks
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                      <a class="dropdown-item" href="{% url 'trademark-create' %}"> Add New Trademark</a>
+                      <a class="dropdown-item " href="{% url 'app-trademark' %}"> All Trademarks</a>
+                    </div>
+                  </li>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <section class="col-md-9 ms-sm-auto col-lg-10 px-md-4 dashsec">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap mt-3 align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2 p-2">Delete Trademark</h1>
+        </div>
+
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group mb-3">
+                   <h2>Are you sure you want to delete the Container "{{ object.trademarkName }}"</h2>
+                </fieldset>
+                <div class="mt-3 mb-3 form-group">
+                    <button class="btn btn-danger py-4 p-4" type="submit">Yes, Delete</button>
+                    <a class="btn btn-secondary py-4 p-4" href="{% url 'app-dashboard' %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+      </section>
+
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
+{% endblock %}

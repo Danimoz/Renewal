@@ -1,0 +1,199 @@
+{% extends "app/base.html" %}
+{% block content %}
+{% load static %}
+
+<body class="bodie">
+    
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Department</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <input class="form-control form-control-dark w-100 mt-2 py-3" type="text" placeholder="Search" aria-label="Search">
+        <div class="navbar-nav">
+          <div class="nav-item text-nowrap">
+            {% if user.is_authenticated %}
+              <a class="nav-link px-3" href="{% url 'profile' %}">Profile</a>
+              <a class="nav-link px-3" href="{% url 'logout' %}">Log out</a>
+            {% else %}
+              <a class="nav-link px-3" href="{% url 'login' %}">Login</a>
+            {% endif %}
+          </div>
+        </div>
+      </header>
+
+      <section>
+        <div class="container">
+          <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 mt-4 col-lg-2 d-md-block bg-light sidebar collapse">
+              <div class="pt-3">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                      <span data-feather="home"></span>
+                      Dashboard
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'app-dashboard' %}">
+                      Logistics
+                    </a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                      Containers
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item " href="{% url 'container-create' %}"> Add New Product</a>
+                      <a class="dropdown-item " href="{% url 'app-container' %}"> All Containers</a>
+                    </div>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenuLink2" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                      Trademarks
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                      <a class="dropdown-item" href="{% url 'trademark-create' %}"> Add New Trademark</a>
+                      <a class="dropdown-item " href="{% url 'app-trademark' %}"> All Trademarks</a>
+                    </div>
+                  </li>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <section class="col-md-9 ms-sm-auto col-lg-10 px-md-4 dashsec">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap mt-3 align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2 p-2">Container</h1>
+        </div>
+
+        {% if messages %}
+          {% for message in messages %}
+            <div class="d-flex flex-sm-row flex-column alert alert-{{message.tags}}">
+                {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        <div class="row">
+          <div class="d-flex flex-sm-row flex-column topsect">
+            <div class="col-md-6 col-lg-6 process">
+              <header>Containers in Process</header>
+              <h4 class="py-4 mb-3">{{prodren}}</h4>
+            </div>
+
+            <div class="d-flex flex-sm-row flex-column col-md-6 prod col-lg-6">
+              <div class="col tot p-3 shadow">
+                <header>Total Number of Products</header>
+                <h4 class="py-4 mb-3">{{conttot}}</h4>
+              </div>
+              <div class="col ren p-3 shadow">
+                <header>Products for Renewal</header>
+                <h4 class="py-4 mb-3">{{exp}}</h4>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row py-4 mt-3">
+          <div class="d-flex flex-sm-row flex-column">
+            <div class="d-flex card card-body">
+              <form method="get">
+                {{maiFilter.form}}
+                <button class="btn btn-primary" type="submit">Search</button>
+              </form>
+            </div>
+
+            <div>
+              <form enctype=""></form>
+            </div>
+          </div>
+        </div>
+
+        <div class="row py-4 mt-3">
+            <div class="d-flex flex-sm-row flex-column">
+              <div class="d-flex card card-body">
+                <h5>Containers</h5>
+                <div class="dflex flex-sm-row flex-column">
+                  <table class="table table-responsive tabul">
+                    <thead>
+                      <tr>
+                        <th>Product Name</th>
+                        <th>Container No</th>
+                        <th>Agent Name</th>
+                        <th>Date Created</th>
+                        <th>Payment Status</th>
+                        <th>Endorsement</th>
+                        <th>Date Renewed</th>
+                        <th>Expiry Date</th>
+                        <th>Uploaded By</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for i in cont %}
+                        <tr>
+                          <td rowspan="2">{{i.productName}}</td>
+                          <td rowspan="2">{{i.containerNo}}</td>
+                          <td rowspan="2">{{i.agentName}}</td>
+                          <td>{{i.dateCreated}}</td>
+                          <td>{{i.receiptDoc}}</td>
+                          <td>{{i.endorsementDoc}}</td>
+                          <td>{{i.dateRenewed}}</td>
+                          <td rowspan="2">{{i.expiryDate}}</td>
+                          <td>{{i.uploadedBy}}</td>
+                        </tr>
+                        <tr class="align-middle">
+                          <td class="justify-content-center align-middle" colspan="4"><a href="{% url 'container-update' i.id %}" class="btn btn-primary">Upload</a></td>
+                          <td><a href="{% url 'container-detail' i.id %}" class="btn btn-secondary">View Files</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="container p-4">
+                  <div class="pagination justify-content-center">
+                    <span class="step-links">
+                      {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{page_obj.previous_page_number}}">previous</a>
+                      {% endif %}
+
+                      <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                      </span>
+
+                      {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a href="?page={{page_obj.paginator.num_pages}}">last &raquo;</a>
+                      {% endif %}
+
+                    </span>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-sm-row flex-column mb-5">
+            <div class="d-flex card card-body shadow rounded-top border-3 border-secondary">
+              <h3 class="mb-3">Products For Renewal</h3>
+              {% for i in trexpired %}
+                  <p>{{ i }}</p><hr>
+              {% endfor %}
+            </div>
+          </div>
+      </section>
+
+
+      <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    
+    </body>
+    
+    </html>
+    {% endblock %}
